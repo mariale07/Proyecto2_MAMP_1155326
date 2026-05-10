@@ -1,0 +1,15 @@
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/bin/Debug/net6.0/granja
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/bin/Debug/net6.0/granja.deps.json
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/bin/Debug/net6.0/granja.runtimeconfig.json
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/bin/Debug/net6.0/granja.dll
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/bin/Debug/net6.0/granja.pdb
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.csproj.AssemblyReference.cache
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.AssemblyInfoInputs.cache
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.AssemblyInfo.cs
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.csproj.CoreCompileInputs.cache
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.dll
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/refint/granja.dll
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.pdb
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/granja.genruntimeconfig.cache
+/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/obj/Debug/net6.0/ref/granja.dll

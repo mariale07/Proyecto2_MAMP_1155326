@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "l3KEnGyufjibZHWs2N+BarzO6uTizn0kOJb5j/aJTi/EtnJJvZgDHQ55cv7z8Q38by+WQGKVQvPUPyxbiH3q2Q==",
+  "success": true,
+  "projectFilePath": "/Users/mariale/Documents/GitHub/Proyecto2_MAMP_1155326/granja/granja/granja.csproj",
+  "expectedPackageFiles": [
+    "/Users/mariale/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.31/microsoft.aspnetcore.app.ref.6.0.31.nupkg.sha512",
+    "/Users/mariale/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.31/microsoft.netcore.app.host.osx-arm64.6.0.31.nupkg.sha512",
+    "/Users/mariale/.nuget/packages/microsoft.netcore.app.ref/6.0.31/microsoft.netcore.app.ref.6.0.31.nupkg.sha512"
+  ],
+  "logs": []
+}
