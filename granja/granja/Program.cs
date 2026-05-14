@@ -7,7 +7,7 @@ class Program
     {
         Console.WriteLine("¡Bienvenid@ a su granja!");
         Console.WriteLine();
-
+        
 
         //Pedir al usuario los datos principales
         Console.WriteLine("Ingrese el monto con el que iniciará su granja: ");
@@ -68,6 +68,9 @@ class Program
             Console.WriteLine("Error. Ingrese un número válido mayor a 0: ");
             Console.ResetColor();
         }
+
+        //OBJETOS
+
         Parcela[,] parcelas = new Parcela[filas, columnas];
 
         for (int i = 0; i < filas; i++)
@@ -77,6 +80,9 @@ class Program
                 parcelas[i, j] = new Parcela();
             }
         }
+
+        Inventario inventario = new Inventario();
+
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Datos ingresados correctamente.");
@@ -115,19 +121,74 @@ class Program
                 case 1:
                     Console.WriteLine("COMPRAR SEMILLAS");
                     Console.WriteLine();
-                    Console.WriteLine("Presione una tecla para regresar al menú...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    break;
-                    //Agregar el resto (siguientes pasos)
-                case 2:
-                    Console.WriteLine("SIEMBRA DE CULTIVOS");
+
+                    double costos_mensuales = num_empleados * sueldo_mensual;
+                    double utilidad = dinero_inicial - costos_mensuales;
+
+                    Console.WriteLine("Utilidad disponible: Q" + utilidad);
+                    Console.WriteLine();
+
+                    Console.WriteLine("Sleccione una semilla: ");
+                    Console.WriteLine("1. Trigo --------- Q" + inventario.costo_trigo);
+                    Console.WriteLine("2. Repollo ------- Q" + inventario.costo_repollo);
+                    Console.WriteLine("3. Tomate -------- Q" + inventario.costo_tomate);
+                    Console.WriteLine("4. Calabaza ------ Q" + inventario.costo_calabaza);
+                    Console.WriteLine("5. Espárrago ----- Q" + inventario.costo_esparrago);
+
+                    int tipo_semilla;
+                    while(!int.TryParse(Console.ReadLine(), out tipo_semilla) || tipo_semilla < 1 || tipo_semilla > 5)
+                    {
+                        Console.WriteLine("Error. Ingrese una opción válida del 1 al 5: ");
+                    }
+
+                    Console.WriteLine("Ingrese la cantidad que desea comprar: ");
+                    int cantidad;
+                    while(!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Error. Ingrese una cantidad válida: ");
+                        Console.ResetColor();
+                    }
+
+                    double total_compra = inventario.CostoFinalCompra(tipo_semilla, cantidad);
+                    
+
+                    if (total_compra <= dinero_inicial)
+                    {
+                        inventario.AgregarSemillas(tipo_semilla, cantidad);
+                        dinero_inicial = dinero_inicial - total_compra;
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Compra realizada correctamente.");
+                        Console.ResetColor();
+                        Console.WriteLine("Dinero restante: Q" + dinero_inicial);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("No tiene suficiente dinero para realizar la compra.");
+                        Console.ResetColor();
+                        Console.Write("Regrese al menú principal para iniciar un nuevo proceso de compra.");
+                    }
+
                     Console.WriteLine();
                     Console.WriteLine("Presione una tecla para regresar al menú...");
                     Console.ReadKey();
                     Console.Clear();
+
                     break;
-                //Agregar el resto (siguientes pasos)
+
+                case 2:
+                    Console.WriteLine("SIEMBRA DE CULTIVOS");
+                    Console.WriteLine();
+
+                    //Agegar el resto
+
+
+                    Console.WriteLine("Presione una tecla para regresar al menú...");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
 
                 case 3:
                     Console.WriteLine("CONSULTA DE PARCELAS");
@@ -149,10 +210,22 @@ class Program
                     }
 
                     Console.Write("Ingrese la fila que desea consultar: ");
-                    int consult_fila = int.Parse(Console.ReadLine());
+                    int consult_fila;
+                    while(!int.TryParse(Console.ReadLine(), out consult_fila) || consult_fila < 0 || consult_fila >= filas) //Trata de convertir en int pero si es una palabra el programa no avanza, si es menor a 0 o se sale de la matriz tampoco lo hace
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Fila inválida. Intente otra vez: ");
+                        Console.ResetColor();
+                    }
 
                     Console.Write("Ingrese la columna que desea consultar: ");
-                    int consult_columna = int.Parse(Console.ReadLine());
+                    int consult_columna;
+                    while(!int.TryParse(Console.ReadLine(), out consult_columna) || consult_columna < 0 || consult_columna >= columnas)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Columna inválida. Intente otra vez: ");
+                        Console.ResetColor();
+                    }
 
                     parcelas[consult_fila, consult_columna].MostrarInfo();
                     Console.WriteLine("Presione una tecla para regresar al menú...");
@@ -168,6 +241,7 @@ class Program
                     Console.Clear();
                     break;
                 //Agregar el resto (siguientes pasos)
+
                 case 5:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Saliendo de la simulación...");
