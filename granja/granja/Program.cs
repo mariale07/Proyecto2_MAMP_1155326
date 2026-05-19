@@ -128,7 +128,7 @@ class Program
                     Console.WriteLine("Utilidad disponible: Q" + utilidad);
                     Console.WriteLine();
 
-                    Console.WriteLine("Sleccione una semilla: ");
+                    Console.WriteLine("Seleccione una semilla: ");
                     Console.WriteLine("1. Trigo --------- Q" + inventario.costo_trigo);
                     Console.WriteLine("2. Repollo ------- Q" + inventario.costo_repollo);
                     Console.WriteLine("3. Tomate -------- Q" + inventario.costo_tomate);
@@ -136,14 +136,14 @@ class Program
                     Console.WriteLine("5. Espárrago ----- Q" + inventario.costo_esparrago);
 
                     int tipo_semilla;
-                    while(!int.TryParse(Console.ReadLine(), out tipo_semilla) || tipo_semilla < 1 || tipo_semilla > 5)
+                    while (!int.TryParse(Console.ReadLine(), out tipo_semilla) || tipo_semilla < 1 || tipo_semilla > 5)
                     {
                         Console.WriteLine("Error. Ingrese una opción válida del 1 al 5: ");
                     }
 
                     Console.WriteLine("Ingrese la cantidad que desea comprar: ");
                     int cantidad;
-                    while(!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0)
+                    while (!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Error. Ingrese una cantidad válida: ");
@@ -151,7 +151,7 @@ class Program
                     }
 
                     double total_compra = inventario.CostoFinalCompra(tipo_semilla, cantidad);
-                    
+
 
                     if (total_compra <= dinero_inicial)
                     {
@@ -182,8 +182,129 @@ class Program
                     Console.WriteLine("SIEMBRA DE CULTIVOS");
                     Console.WriteLine();
 
-                    //Agegar el resto
+                    Console.WriteLine("MAPA");
+                    for (int i = 0; i < filas; i++) //Mapa
+                    {
+                        for (int j = 0; j < columnas; j++)
+                        {
+                            if (parcelas[i, j].parcela_ocupada == true)
+                            {
+                                Console.Write("[Ocupada]");
+                            }
+                            else
+                            {
+                                Console.Write("[Libre]");
+                            }
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.WriteLine();
 
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Nota: La primera fila corresponde al número 0");
+                    Console.ResetColor();
+                    Console.Write("Ingrese la fila en la que desea sembrar un cultivo: ");
+                    int siembra_fila;
+                    while (!int.TryParse(Console.ReadLine(), out siembra_fila) || siembra_fila < 0 || siembra_fila >= filas) //Trata de convertir en int pero si es una palabra el programa no avanza, si es menor a 0 o se sale de la matriz tampoco lo hace
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Fila inválida. Intente otra vez: ");
+                        Console.ResetColor();
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Nota: La primera columan corresponde al número 0");
+                    Console.ResetColor();
+                    Console.Write("Ingrese la columna en la que desea sembrar un cultivo: ");
+                    int siembra_columna;
+                    while (!int.TryParse(Console.ReadLine(), out siembra_columna) || siembra_columna < 0 || siembra_columna >= columnas)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Columna inválida. Intente otra vez: ");
+                        Console.ResetColor();
+                    }
+
+                    while (parcelas[siembra_fila, siembra_columna].parcela_ocupada == true)
+                    {
+                        Console.WriteLine("La parcela ya está ocupada, seleccione otra parcela e ingrese los nuevos valores: ");
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Nota: La primera fila corresponde al número 0");
+                        Console.ResetColor();
+                        Console.Write("Ingrese la nueva fila en la que desea sembrar un cultivo: ");
+
+                        while (!int.TryParse(Console.ReadLine(), out siembra_fila) || siembra_fila < 0 || siembra_fila >= filas) //Trata de convertir en int pero si es una palabra el programa no avanza, si es menor a 0 o se sale de la matriz tampoco lo hace
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Fila inválida. Intente otra vez: ");
+                            Console.ResetColor();
+                        }
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Nota: La primera columna corresponde al número 0");
+                        Console.ResetColor();
+                        Console.Write("Ingrese la nueva columna en la que desea sembrar un cultivo: ");
+
+                        while (!int.TryParse(Console.ReadLine(), out siembra_columna) || siembra_columna < 0 || siembra_columna >= columnas)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Columna inválida. Intente otra vez: ");
+                            Console.ResetColor();
+                        }
+                    }
+
+                    Console.WriteLine();
+                    Console.WriteLine("SEMILLAS DISPONIBLES: ");
+                    Console.WriteLine("1. Trigo: " + inventario.cant_trigo);
+                    Console.WriteLine("2. Repollo: " + inventario.cant_repollo);
+                    Console.WriteLine("3. Tomate: " + inventario.cant_tomate);
+                    Console.WriteLine("4. Calabaza: " + inventario.cant_calabaza);
+                    Console.WriteLine("5. Espárrago: " + inventario.cant_esparrago);
+                    Console.WriteLine();
+                    int seleccion_semilla;
+
+                    do
+                    {
+                        Console.Write("Seleccione la semilla que desea sembrar: ");
+                        while (!int.TryParse(Console.ReadLine(), out seleccion_semilla) || seleccion_semilla < 1 || seleccion_semilla > 5)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Error. Seleccione una opción válida: ");
+                            Console.ResetColor();
+                        }
+
+                        if (!inventario.VerificarSemillas(seleccion_semilla)) // el signo de exclamación indica que es falso
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("No tiene semillas disponibles de ese cultivo.");
+                            Console.ResetColor();
+                        }
+
+                    } while (!inventario.VerificarSemillas(seleccion_semilla)); //lo mismo que poner: inventario.VerificarSemillas(seleccion_semilla) == false
+
+                    inventario.SembrarEnParcela(seleccion_semilla, parcelas[siembra_fila, siembra_columna]);
+                    Console.WriteLine(parcelas[siembra_fila, siembra_columna].tipo_cultivo_actual);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Se sembró correctamente.");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine("MAPA");
+                    for (int i = 0; i < filas; i++)
+                    {
+                        for (int j = 0; j < columnas; j++)
+                        {
+                            if (parcelas[i, j].parcela_ocupada == true)
+                            {
+                                Console.Write("[" + parcelas[i,j].tipo_cultivo_actual + "]");
+                            }
+                            else
+                            {
+                                Console.Write("[Libre]");
+                            }
+                        }
+                        Console.WriteLine();
+                    }
 
                     Console.WriteLine("Presione una tecla para regresar al menú...");
                     Console.ReadKey();
@@ -198,18 +319,21 @@ class Program
                         {
                             if (parcelas[i,j].parcela_ocupada == true)
                             {
-                                Console.Write("[0]");
+                                Console.Write("[Ocupada]");
                             }
                             else
                             {
-                                Console.Write("[L]");
+                                Console.Write("[Libre]");
                             }
                         }
                         Console.WriteLine();
-                        
                     }
-
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Nota: La primera fila corresponde al número 0");
+                    Console.ResetColor();
                     Console.Write("Ingrese la fila que desea consultar: ");
+
                     int consult_fila;
                     while(!int.TryParse(Console.ReadLine(), out consult_fila) || consult_fila < 0 || consult_fila >= filas) //Trata de convertir en int pero si es una palabra el programa no avanza, si es menor a 0 o se sale de la matriz tampoco lo hace
                     {
@@ -218,7 +342,11 @@ class Program
                         Console.ResetColor();
                     }
 
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Nota: La primera columna corresponde al número 0");
+                    Console.ResetColor();
                     Console.Write("Ingrese la columna que desea consultar: ");
+
                     int consult_columna;
                     while(!int.TryParse(Console.ReadLine(), out consult_columna) || consult_columna < 0 || consult_columna >= columnas)
                     {
@@ -227,6 +355,7 @@ class Program
                         Console.ResetColor();
                     }
 
+                    Console.WriteLine();
                     parcelas[consult_fila, consult_columna].MostrarInfo();
                     Console.WriteLine("Presione una tecla para regresar al menú...");
                     Console.ReadKey();
@@ -236,11 +365,13 @@ class Program
                 case 4:
                     Console.WriteLine("AVANCE DE MES");
                     Console.WriteLine();
+
+
+
                     Console.WriteLine("Presione una tecla para regresar al menú...");
                     Console.ReadKey();
                     Console.Clear();
                     break;
-                //Agregar el resto (siguientes pasos)
 
                 case 5:
                     Console.ForegroundColor = ConsoleColor.Yellow;

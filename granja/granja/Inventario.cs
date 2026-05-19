@@ -82,6 +82,79 @@ namespace granja
                 cant_esparrago = cant_esparrago + cantidad;
             }
         }
+
+        public bool VerificarSemillas(int seleccion_semilla)
+        {
+            if (seleccion_semilla == 1 && cant_trigo > 0)
+            {
+                return true;
+            }
+            else if (seleccion_semilla == 2 && cant_repollo > 0)
+            {
+                return true;
+            }
+            else if (seleccion_semilla == 3 && cant_tomate > 0)
+            {
+                return true;
+            }
+            else if (seleccion_semilla == 4 && cant_calabaza > 0)
+            {
+                return true;
+            }
+            else if (seleccion_semilla == 5 && cant_esparrago > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void SembrarEnParcela(int tipo_semilla, Parcela parcela) //Llama de la clase parcela
+        {
+            if (tipo_semilla == 1)
+            {
+                if (cant_trigo > 0)
+                {
+                    parcela.Sembrar("Trigo");
+                    cant_trigo--;
+                }
+            }
+            else if (tipo_semilla == 2)
+            {
+                if (cant_repollo > 0)
+                {
+                    parcela.Sembrar("Repollo");
+                    cant_repollo--;
+                }
+            }
+            else if (tipo_semilla == 3)
+            {
+                if (cant_tomate > 0)
+                {
+                    parcela.Sembrar("Tomate");
+                    cant_tomate--;
+                }
+            }
+            else if (tipo_semilla == 4)
+            {
+                if (cant_calabaza > 0)
+                {
+                    parcela.Sembrar("Calabaza");
+                    cant_calabaza--;
+                }
+            }
+            else if (tipo_semilla == 5)
+            {
+                if (cant_esparrago > 0)
+                {
+                    parcela.Sembrar("Espárrago");
+                    cant_esparrago--;
+                }
+            }
+        }
+
 	}
 }
 
